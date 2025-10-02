@@ -1,132 +1,179 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hacker Buttons with Matrix Rain</title>
-  <style>
-    :root {
-      --accent:#00ff41;
-      --neon:#00ff41;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      height:100vh;background:#000;
-      font-family:Consolas,monospace;
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
-    }
-    canvas {
-      position:fixed;
-      top:0;left:0;width:100%;height:100%;
-      z-index:0;
-      background:#000;
-    }
-    .panel{
-      width:90%;max-width:700px;padding:24px;
-      border-radius:12px;
-      background:rgba(0,0,0,0.6);
-      border:1px solid rgba(0,255,65,0.3);
-      box-shadow:0 0 20px rgba(0,255,65,0.4);
-      position:relative;z-index:1;
-    }
-    h1{
-      color:var(--accent);margin-bottom:12px;
-      text-align:center;
-      text-shadow:0 0 8px var(--neon);
-    }
-    .btn-list{
-      list-style:none;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:12px;
-      padding:0;
-    }
-    .btn-list a{
-      display:flex;align-items:center;gap:10px;
-      padding:12px 16px;
-      border:1px solid rgba(0,255,65,0.3);
-      border-radius:8px;
-      background:rgba(0,0,0,0.4);
-      color:var(--accent);font-weight:600;text-decoration:none;
-      transition:.3s;
-      box-shadow:0 0 10px rgba(0,255,65,0.2);
-      position:relative;z-index:1;
-    }
-    .btn-list a:hover{
-      transform:translateY(-4px) scale(1.05);
-      box-shadow:0 0 15px var(--neon),0 0 25px rgba(0,255,65,0.6);
-      background:rgba(0,255,65,0.1);
-      color:#d1fae5;
-    }
-    .icon{
-      width:34px;height:34px;
-      border-radius:6px;background:var(--accent);
-      color:#000;display:flex;align-items:center;justify-content:center;
-      font-weight:bold;
-      flex-shrink:0;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sarvesh Kumar - </title>
+<style>
+:root {
+  --accent:#00ff41;
+  --neon:#00ff41;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  height:100vh;background:#000;
+  font-family:Consolas,monospace;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+canvas {
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  z-index:0;
+  background:#000;
+}
+.panel{
+  width:90%;max-width:700px;padding:24px;
+  border-radius:12px;
+  background:rgba(0,0,0,0.6);
+  border:1px solid rgba(0,255,65,0.3);
+  box-shadow:0 0 20px rgba(0,255,65,0.4);
+  position:relative;z-index:1;
+}
+.username{
+  text-align:center;
+  font-size:1.5rem;
+  margin-bottom:16px;
+  font-weight:bold;
+  color:#0f0;
+  letter-spacing:2px;
+  text-shadow:0 0 8px var(--neon), 0 0 16px rgba(0,255,65,0.8);
+  display:flex;align-items:center;justify-content:center;
+}
+.cursor{
+  display:inline-block;
+  width:2px;
+  background:var(--neon);
+  margin-left:2px;
+  animation: blink 0.7s infinite;
+}
+@keyframes blink{
+  0%, 50%, 100%{opacity:1;}
+  25%, 75%{opacity:0;}
+}
+.btn-list{
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;
+  padding:0;
+}
+.btn-list a{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;
+  border:1px solid rgba(0,255,65,0.3);
+  border-radius:8px;
+  background:rgba(0,0,0,0.4);
+  color:var(--accent);font-weight:600;text-decoration:none;
+  transition:.3s;
+  box-shadow:0 0 10px rgba(0,255,65,0.2);
+  position:relative;z-index:1;overflow:hidden;
+}
+.btn-list a:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 0 15px var(--neon),0 0 25px rgba(0,255,65,0.6);
+  background:rgba(0,255,65,0.1);
+  color:#d1fae5;
+}
+.icon{
+  width:34px;height:34px;
+  border-radius:6px;background:var(--accent);
+  color:#000;display:flex;align-items:center;justify-content:center;
+  font-weight:bold;
+  flex-shrink:0;
+}
+.fade-letter{
+  opacity:0;
+  animation: fadeIn 0.5s forwards;
+}
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+</style>
 </head>
 <body>
-  <canvas id="matrix"></canvas>
-  <div class="panel">
-    <h1>Hacker Style Menu</h1>
-    <ul class="btn-list">
-      <li><a href="pic1.html" target="_blank"><span class="icon">1</span> PIC</a></li>
-      <li><a href="pic2.html" target="_blank"><span class="icon">2</span> PIC</a></li>
-      <li><a href="pic3.html" target="_blank"><span class="icon">3</span> PIC</a></li>
-      <li><a href="pic4.html" target="_blank"><span class="icon">4</span> PIC</a></li>
-      <li><a href="pic5.html" target="_blank"><span class="icon">5</span> PIC</a></li>
-      <li><a href="pic6.html" target="_blank"><span class="icon">6</span> PIC</a></li>
-      <li><a href="pic7.html" target="_blank"><span class="icon">7</span> PIC</a></li>
-      <li><a href="pic8.html" target="_blank"><span class="icon">8</span> PIC</a></li>
-      <li><a href="pic9.html" target="_blank"><span class="icon">9</span> PIC</a></li>
-      <li><a href="pic10.html" target="_blank"><span class="icon">10</span> PIC</a></li>
-      <li><a href="happy2.html" target="_blank"><span class="icon">H</span> HAPPY BIRTHDAY</a></li>
-    </ul>
-  </div>
+<canvas id="matrix"></canvas>
+<div class="panel">
+  <div class="username" id="typing"></div>
+  <ul class="btn-list">
+    <li><a href="pic1.html" target="_blank"><span class="icon">1</span> PIC</a></li>
+    <li><a href="pic2.html" target="_blank"><span class="icon">2</span> PIC</a></li>
+    <li><a href="pic3.html" target="_blank"><span class="icon">3</span> PIC</a></li>
+    <li><a href="pic4.html" target="_blank"><span class="icon">4</span> PIC</a></li>
+    <li><a href="pic5.html" target="_blank"><span class="icon">5</span> PIC</a></li>
+    <li><a href="pic6.html" target="_blank"><span class="icon">6</span> PIC</a></li>
+    <li><a href="pic7.html" target="_blank"><span class="icon">7</span> PIC</a></li>
+    <li><a href="pic8.html" target="_blank"><span class="icon">8</span> PIC</a></li>
+    <li><a href="pic9.html" target="_blank"><span class="icon">9</span> PIC</a></li>
+    <li><a href="pic10.html" target="_blank"><span class="icon">10</span> PIC</a></li>
+    <li><a href="happy2.html" target="_blank"><span class="icon">H</span> HAPPY BIRTHDAY</a></li>
+  </ul>
+</div>
 
-  <script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
+<!-- Typing sound -->
+<audio id="typeSound" src="https://freesound.org/data/previews/320/320655_5260879-lq.mp3"></audio>
 
-    const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤャユュヨョラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const lettersArr = letters.split("");
+<script>
+/* Matrix Rain */
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤャユュヨョラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const lettersArr = letters.split("");
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = [];
+for(let x = 0; x < columns; x++) drops[x] = 1;
+function draw(){
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#0F0";
+  ctx.font = fontSize + "px monospace";
+  for(let i = 0; i < drops.length; i++){
+    const text = lettersArr[Math.floor(Math.random() * lettersArr.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(draw, 35);
+window.addEventListener("resize", () => {
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+});
 
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = [];
+/* Typing animation with fade effect + realistic sound */
+const username = "👨‍💻❤️ Sarvesh Kumar";
+const typingElem = document.getElementById("typing");
+let index = 0;
+const typeSound = document.getElementById("typeSound");
 
-    for(let x = 0; x < columns; x++)
-      drops[x] = 1;
+function type(){
+  if(index < username.length){
+    const span = document.createElement("span");
+    span.classList.add("fade-letter");
+    span.textContent = username[index];
+    typingElem.appendChild(span);
 
-    function draw(){
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Typing sound with variation
+    typeSound.volume = Math.random() * 0.3 + 0.7;
+    typeSound.currentTime = 0;
+    typeSound.play();
 
-      ctx.fillStyle = "#0F0";
-      ctx.font = fontSize + "px monospace";
-
-      for(let i = 0; i < drops.length; i++){
-        const text = lettersArr[Math.floor(Math.random() * lettersArr.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
-          drops[i] = 0;
-        drops[i]++;
-      }
-    }
-    setInterval(draw, 35);
-
-    window.addEventListener("resize", () => {
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-    });
-  </script>
+    index++;
+    let delay = Math.random() * 200 + 50;
+    setTimeout(type, delay);
+  } else {
+    const cursor = document.createElement("span");
+    cursor.classList.add("cursor");
+    let blinkSpeed = Math.random() * 0.5 + 0.5;
+    cursor.style.animation = `blink ${blinkSpeed}s infinite`;
+    typingElem.appendChild(cursor);
+  }
+}
+type();
+</script>
 </body>
 </html>
-
-
