@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Sarvesh Kumar - </title>
+<title>Sarvesh Kumar</title>
 <style>
 :root {
   --accent:#00ff41;
@@ -12,7 +12,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   height:100vh;background:#000;
-  font-family:Consolas,monospace;
+  font-family:Consolas, monospace, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
 }
@@ -90,10 +90,6 @@ canvas {
   from {opacity:0;}
   to {opacity:1;}
 }
-  body {
-    font-family: Consolas, monospace, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-}
-
 </style>
 </head>
 <body>
@@ -148,20 +144,20 @@ window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
 });
 
-/* Typing animation with fade effect + realistic sound */
+/* Typing animation with emoji-safe fix + realistic sound */
 const username = "👨‍💻❤️ Sarvesh Kumar";
+const chars = Array.from(username); // emoji-safe split
 const typingElem = document.getElementById("typing");
 let index = 0;
 const typeSound = document.getElementById("typeSound");
 
 function type(){
-  if(index < username.length){
+  if(index < chars.length){
     const span = document.createElement("span");
     span.classList.add("fade-letter");
-    span.textContent = username[index];
+    span.textContent = chars[index];
     typingElem.appendChild(span);
 
-    // Typing sound with variation
     typeSound.volume = Math.random() * 0.3 + 0.7;
     typeSound.currentTime = 0;
     typeSound.play();
@@ -181,4 +177,3 @@ type();
 </script>
 </body>
 </html>
-
