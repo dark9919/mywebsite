@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3rd Anniversary 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{overflow:hidden;background:black;}
+
+/* NAME PAGE */
+#namePage{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd1dc,#ffc0cb);
+}
+.card{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  width:300px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(255,105,180,0.4);
+}
+.card h1{color:#ff4d88;margin-bottom:20px;}
+.card input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:2px solid pink;
+  outline:none;
+}
+.card button{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  background:#ff4d88;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* HACKER PAGE */
+#hackerPage{
+  display:none;
+  color:#00ff99;
+  padding:20px;
+  font-family:monospace;
+}
+
+/* MAIN PAGE */
+#mainPage{display:none;height:100vh;position:relative;}
+#matrix{position:absolute;top:0;left:0;width:100%;height:100%;}
+
+/* INSTAGRAM CARD */
+.insta-card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#111;
+  border-radius:15px;
+  width:340px;
+  z-index:2;
+  box-shadow:0 0 30px hotpink;
+  color:white;
+}
+
+/* HEADER */
+.insta-header{
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:2px solid hotpink;
+}
+
+#finalName{
+  font-size:16px;
+  font-weight:700;
+  background:linear-gradient(90deg,#ff69b4,#ffd1dc,#ff1493);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* POST */
+.post-img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+}
+.insta-body{padding:15px;}
+.insta-body h2{
+  color:hotpink;
+  font-size:18px;
+  text-align:center;
+}
+.shayari{
+  margin-top:12px;
+  font-size:14px;
+  color:#ffd1dc;
+  line-height:1.5;
+  min-height:90px;
+  text-align:center;
+}
+.timer{
+  margin-top:10px;
+  font-size:13px;
+  color:#ff9ecb;
+  text-align:center;
+}
+
+.proposal-btn{
+  margin-top:15px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#ff69b4,#ff1493);
+  color:white;
+  cursor:pointer;
+}
+
+/* PROPOSAL PAGE */
+#proposalPage{
+  display:none;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:radial-gradient(circle,#ffb6c1,#ff69b4);
+  z-index:5;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:white;
+}
+
+/* ❤️ HEART ANIMATION (FIXED) */
+.heart{
+  position:fixed;
+  font-size:28px;
+  color:pink;
+  animation:heartFloat 2.2s ease-out forwards;
+  pointer-events:none;
+  z-index:9999;
+}
+@keyframes heartFloat{
+  0%{transform:scale(0.6) translateY(0);opacity:1;}
+  100%{transform:scale(1.6) translateY(-160px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAME PAGE -->
+<div id="namePage">
+  <div class="card">
+    <h1>💕 Enter Your Name 💕</h1>
+    <input id="username" placeholder="Your Name">
+    <button onclick="startHacker()">Open Surprise</button>
+  </div>
+</div>
+
+<!-- HACKER PAGE -->
+<div id="hackerPage"><pre id="hack"></pre></div>
+
+<!-- MAIN PAGE -->
+<div id="mainPage">
+<canvas id="matrix"></canvas>
+
+<div class="insta-card">
+  <div class="insta-header">
+    <img src="image/dp.jpg" class="avatar">
+    <span id="finalName"></span>
+  </div>
+
+  <img src="image/main.jpg" class="post-img">
+
+  <div class="insta-body">
+    <h2>💖 Happy 3rd Anniversary 💖</h2>
+    <div class="shayari" id="shayari"></div>
+    <div class="timer" id="timer"></div>
+    <button class="proposal-btn" onclick="openProposal()">🌹 Click for Surprise</button>
+  </div>
+</div>
+
+<div id="proposalPage">
+  <div>
+    <h1>Will You Stay With Me Forever? 💍</h1>
+    <p>Har din, har janam, sirf tum ❤️</p>
+  </div>
+</div>
+</div>
+
+<script>
+let lines=[
+  "Initializing Love.exe...",
+  "Decrypting Memories...",
+  "Access Granted ❤️"
+];
+
+function startHacker(){
+  let name=username.value;
+  if(name.trim()===""){alert("Name likho 😊");return;}
+
+  namePage.style.display="none";
+  hackerPage.style.display="block";
+
+  let i=0;
+  hack.innerHTML="";
+
+  let t=setInterval(()=>{
+    hack.innerHTML+=lines[i]+"\n";
+    i++;
+    if(i===lines.length){
+      clearInterval(t);
+      setTimeout(()=>{
+        hackerPage.style.display="none";
+        mainPage.style.display="block";
+        finalName.innerText=name;
+        startMatrix();
+      },800);
+    }
+  },600);
+}
+
+function startMatrix(){
+  const c=matrix,ctx=c.getContext("2d");
+  c.width=innerWidth;c.height=innerHeight;
+  const letters="01LOVE",fs=16;
+  const cols=c.width/fs;
+  const drops=Array(Math.floor(cols)).fill(1);
+
+  setInterval(()=>{
+    ctx.fillStyle="rgba(0,0,0,0.08)";
+    ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle="hotpink";
+    ctx.font=fs+"px monospace";
+    for(let i=0;i<drops.length;i++){
+      let txt=letters[Math.floor(Math.random()*letters.length)];
+      ctx.fillText(txt,i*fs,drops[i]*fs);
+      if(drops[i]*fs>c.height && Math.random()>0.97)drops[i]=0;
+      drops[i]++;
+    }
+  },33);
+
+  typeShayari();
+  startTimer();
+}
+
+function typeShayari(){
+  const text=`Tum saath ho to har pal khoobsurat lagta hai,
+Teen saal beet gaye par pyaar naya lagta hai,
+Haath thaame chalna hai zindagi bhar,
+Kya tum mere saath rahogi hamesha? 💕`;
+  let i=0;
+  shayari.innerHTML="";
+  let t=setInterval(()=>{
+    shayari.innerHTML+=text[i]==="\n"?"<br>":text[i];
+    i++; if(i>=text.length)clearInterval(t);
+  },45);
+}
+
+function startTimer(){
+  const start=new Date("2023-01-01T00:00:00");
+  setInterval(()=>{
+    let d=new Date()-start;
+    let s=Math.floor(d/1000)%60;
+    let m=Math.floor(d/60000)%60;
+    let h=Math.floor(d/3600000)%24;
+    let day=Math.floor(d/86400000)%30;
+    let mon=Math.floor(d/2592000000)%12;
+    let yr=Math.floor(d/31536000000);
+    timer.innerText=`Together Since 01/01/2023 💑
+${yr}Y : ${mon}M : ${day}D : ${h}H : ${m}M : ${s}S`;
+  },1000);
+}
+
+/* ❤️ HEART + PROPOSAL */
+function openProposal(){
+  for(let i=0;i<30;i++){
+    setTimeout(createHeart,i*60);
+  }
+  setTimeout(()=>proposalPage.style.display="flex",800);
+}
+
+function createHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.top=(75+Math.random()*20)+"vh";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),2200);
+}
+</script>
+
+</body>
+</html>
